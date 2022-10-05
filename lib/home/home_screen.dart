@@ -1,9 +1,14 @@
-import 'package:cep_search_test/home/components/floating_button.dart';
-import 'package:cep_search_test/home/components/today_tab_view.dart';
+import 'package:cep_search_test/home/controller/home_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import 'components/floating_button.dart';
+import 'components/today_tab_view.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+  final homeController = Get.put(HomeController());
+
+  HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +37,7 @@ class HomePage extends StatelessWidget {
             ListView.builder(
               itemBuilder: (context, index) => const ExpansionTile(
                 title: Text("01/10/2022"),
-                children: [
-                ],
+                children: [],
               ),
             ),
           ],

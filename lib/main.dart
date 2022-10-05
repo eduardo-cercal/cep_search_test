@@ -1,7 +1,6 @@
+import 'package:cep_search_test/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import 'Home/home_screen.dart';
 
 void main()=>runApp(const CEPSearch());
 
@@ -10,7 +9,7 @@ class CEPSearch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const GetMaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       home: HomePage(),
     );
