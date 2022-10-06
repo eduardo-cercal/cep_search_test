@@ -6,9 +6,9 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../../../../../helpers/api_service.dart';
 
-class SimpleSearchController extends GetxController{
+class SimpleSearchController extends GetxController {
   final homeController = Get.find<HomeController>();
-  
+
   final cepController = TextEditingController().obs;
 
   final cepMap = {}.obs;
@@ -33,11 +33,12 @@ class SimpleSearchController extends GetxController{
       cepInfo return error
       {erro: true}
       */
+    print(cepInfo.toString());
     if (cepInfo["cep"] != null) {
       List<Location> placeMarks = await locationFromAddress(
           "${cepInfo["bairro"]}, ${cepInfo["localidade"]}");
       List<Location> cityMarks =
-      await locationFromAddress(cepInfo["localidade"]);
+          await locationFromAddress(cepInfo["localidade"]);
       Set<Marker> marker = {};
       List<Marker> markersList = [
         Marker(
@@ -55,7 +56,11 @@ class SimpleSearchController extends GetxController{
         "logradouro": cepInfo["logradouro"],
         "complemento": cepInfo["complemento"],
         "cityMarks": cityMarks,
-        "marker": marker
+        "marker": marker,
+        "cityLatitude": cityMarks[0].latitude,
+        "cityLongitude": cityMarks[0].longitude,
+        "markerLatitude": placeMarks[0].latitude,
+        "markerLongitude": placeMarks[0].longitude,
       };
     } else {
       cepMap.value = cepInfo;

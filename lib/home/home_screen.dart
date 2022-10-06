@@ -33,7 +33,7 @@ class HomePage extends StatelessWidget {
         floatingActionButton: const FloatingButton(),
         body: TabBarView(
           children: [
-            const TodayTabView(),
+            TodayTabView(),
             ListView.builder(
               itemBuilder: (context, index) => const ExpansionTile(
                 title: Text("01/10/2022"),

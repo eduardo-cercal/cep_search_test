@@ -81,14 +81,19 @@ class SimpleSearch extends StatelessWidget {
                                             ),
                                             Positioned(
                                               left: mediaData.width * 0.65,
-                                              child: homeController.isSaving.value
-                                                  ? const Center(
-                                                widthFactor: 1,
-                                                      child:
-                                                          SizedBox(width: 15,height: 15,child: CircularProgressIndicator()),
-                                                    )
-                                                  : const FaIcon(FontAwesomeIcons
-                                                      .floppyDisk),
+                                              child:
+                                                  homeController.isSaving.value
+                                                      ? const Center(
+                                                          widthFactor: 1,
+                                                          child: SizedBox(
+                                                              width: 15,
+                                                              height: 15,
+                                                              child:
+                                                                  CircularProgressIndicator()),
+                                                        )
+                                                      : const FaIcon(
+                                                          FontAwesomeIcons
+                                                              .floppyDisk),
                                             )
                                           ],
                                         ),
@@ -96,7 +101,8 @@ class SimpleSearch extends StatelessWidget {
                                       Text(
                                           "${cepMap["cidade"]}/${cepMap["estado"]}"),
                                       Text("Bairro: ${cepMap["bairro"]}"),
-                                      Text("Logradouro: ${cepMap["logradouro"]}"),
+                                      Text(
+                                          "Logradouro: ${cepMap["logradouro"]}"),
                                       Text(
                                           "Complemento: ${cepMap["complemento"]}"),
                                       SizedBox(
@@ -106,16 +112,17 @@ class SimpleSearch extends StatelessWidget {
                                           mapType: MapType.normal,
                                           initialCameraPosition: CameraPosition(
                                               target: LatLng(
-                                                  cepMap["cityMarks"][0].latitude,
+                                                  cepMap["cityMarks"][0]
+                                                      .latitude,
                                                   cepMap["cityMarks"][0]
                                                       .longitude),
                                               zoom: 11),
                                           markers: cepMap["marker"],
-                                          onMapCreated:
-                                              (GoogleMapController controller) =>
-                                                  homeController
-                                                      .googleController.value
-                                                      .complete(controller),
+                                          onMapCreated: (GoogleMapController
+                                                  controller) =>
+                                              homeController
+                                                  .googleController.value
+                                                  .complete(controller),
                                         ),
                                       )
                                     ],
@@ -125,10 +132,17 @@ class SimpleSearch extends StatelessWidget {
                             )
                           : const Center(
                               child: Text(
-                                  "CEP inválido\nTente a pesquisa avançada para achar o CEP Correto"),
+                                  "CEP inválido\nTente novamente com o CEP Correto",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15),
+                                  textAlign: TextAlign.center),
                             )
                       : const Center(
-                          child: Text("Pesquise um CEP"),
+                          child: Text("Pesquise um CEP",style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15),
+                              textAlign: TextAlign.center),
                         ),
             ],
           );
