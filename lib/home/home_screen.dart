@@ -33,6 +33,7 @@ class HomePage extends StatelessWidget {
         ),
         floatingActionButton: const FloatingButton(),
         body: TabBarView(
+          physics: const NeverScrollableScrollPhysics(),
           children: [
             TodayTabView(),
             AllTabView(),

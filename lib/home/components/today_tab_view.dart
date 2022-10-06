@@ -20,9 +20,12 @@ class TodayTabView extends StatelessWidget {
   Widget build(BuildContext context) {
     Completer<GoogleMapController> _controller = Completer();
     final mediaData = MediaQuery.of(context).size;
-    homeController.todaySearch(
-        DateTime.parse(DateFormat("yyyy-MM-dd").format(DateTime.now()))
-            .millisecondsSinceEpoch);
+    Future.delayed(
+      Duration.zero,
+      () => homeController.todaySearch(
+          DateTime.parse(DateFormat("yyyy-MM-dd").format(DateTime.now()))
+              .millisecondsSinceEpoch),
+    );
     return Obx(
       () {
         if (homeController.loadingList.value) {

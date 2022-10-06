@@ -54,6 +54,7 @@ class SearchDialog extends StatelessWidget {
                                   DateFormat("yyyy-MM-dd")
                                       .format(DateTime.now()))
                               .millisecondsSinceEpoch);
+                          homeController.allSearch();
                           Get.back();
                         },
                         style: ButtonStyle(

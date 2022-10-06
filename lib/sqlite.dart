@@ -7,6 +7,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 
 import 'model/cep_model.dart';
+import 'model/date_model.dart';
 
 class DatabaseHelper {
   DatabaseHelper._privateConstructor();
@@ -44,13 +45,14 @@ class DatabaseHelper {
         : [];
   }
 
-  Future<List> getAllDates() async {
+  Future<List<DateModel>> getAllDates() async {
     Database db = await instance.database;
     final queryResult = await db.rawQuery(
         '''select $dateTimeIns, count(*) from $cepTable group by $dateTimeIns''');
 
-
-    return [];
+    return queryResult.isNotEmpty
+        ? queryResult.map((json) => DateModel.fromJson(json)).toList()
+        : [];
   }
 
   Future<void> insert(CepModel cepModel) async {
