@@ -42,10 +42,14 @@ class DatabaseHelper {
       DateTime.parse(DateFormat("yyyy-MM-dd").format(DateTime.now()))
           .millisecondsSinceEpoch
     ]);
-
     return queryResult.isNotEmpty
         ? queryResult.map((json) => CepModel.fromJson(json)).toList()
         : [];
+  }
+
+  Future<List> getAllDates() async {
+    Database db = await instance.database;
+    return await db.query(cepTable, columns: [dateTimeIns]);
   }
 
   Future<void> insert(CepModel cepModel) async {

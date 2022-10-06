@@ -18,23 +18,22 @@ class TodayTabView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Completer<GoogleMapController> _controller = Completer();
-    return FutureBuilder<List<CepModel>>(
-      future: homeController.todaySearch(),
-      builder: (context, snapshot) {
-        print(snapshot);
-        if (!snapshot.hasData) {
+    homeController.todaySearch();
+    return Obx(
+      () {
+        if (homeController.loadingList.value) {
           return const Center(
             child: CircularProgressIndicator(),
           );
         }
-        return snapshot.data!.isEmpty
+        return homeController.cepList.isEmpty
             ? const Center(
                 child: Text("Nenhuma pesquisa feita hoje"),
               )
             : ListView.builder(
-                itemCount: snapshot.data!.length,
+                itemCount: homeController.cepList.length,
                 itemBuilder: (context, index) {
-                  final item = snapshot.data![index];
+                  final item = homeController.cepList[index];
                   return Card(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20)),

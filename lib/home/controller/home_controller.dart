@@ -16,8 +16,15 @@ class HomeController extends GetxController {
 
   final isSaving = false.obs;
 
-  Future<List<CepModel>> todaySearch() async =>
-      await DatabaseHelper.instance.getTodaySearch();
+  final loadingList = false.obs;
+
+  final cepList = [].obs;
+
+  Future<void> todaySearch() async {
+    loadingList.value = true;
+    cepList.value = await DatabaseHelper.instance.getTodaySearch();
+    loadingList.value = false;
+  }
 
   Future<void> saveCep() async {
     isSaving.value = true;
