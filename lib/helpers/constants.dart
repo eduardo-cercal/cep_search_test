@@ -7,3 +7,5 @@ const cityLongitude = "cityLongitude";
 const markerLatitude = "markerLatitude";
 const markerLongitude = "markerLongitude";
 const dateTimeIns = "dateTimeIns";
+const count = "count";
+const dateTimeCount = "dateTimeCount";

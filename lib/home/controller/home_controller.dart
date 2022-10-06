@@ -28,17 +28,17 @@ class HomeController extends GetxController {
 
   Future<void> todaySearch(int date) async {
     loadingList.value = true;
-    cepList.value =  await FireBaseHelper.getCep(date);
+    cepList.value = await FireBaseHelper.getCep(date);
     loadingList.value = false;
   }
 
   Future<void> allSearch() async {
     loadingList.value = true;
     cepDateList.clear();
-    dateList.value = await DatabaseHelper.instance.getAllDates();
+    dateList.value = await FireBaseHelper.getDateTimeCount();
     for (DateModel element in dateList) {
-      final List<CepModel> listCep = await DatabaseHelper.instance
-          .getTodaySearch(element.dateTime.millisecondsSinceEpoch);
+      final List<CepModel> listCep =
+          await FireBaseHelper.getCep(element.dateTime.millisecondsSinceEpoch);
       final map = {element.dateTime: listCep};
       cepDateList.add(map);
     }
@@ -49,6 +49,8 @@ class HomeController extends GetxController {
     isSaving.value = true;
     final simpleSearchController = Get.find<SimpleSearchController>();
     final map = simpleSearchController.cepMap;
+    final today =
+        DateTime.parse(DateFormat("yyyy-MM-dd").format(DateTime.now()));
     final CepModel cepModel = CepModel(
         cep: map["cep"],
         bairro: map["bairro"],
@@ -56,9 +58,9 @@ class HomeController extends GetxController {
         cidadeLongitude: map['cityLongitude'],
         marcadorLatitude: map['markerLatitude'],
         marcadorLongitude: map["markerLongitude"],
-        dateTime:
-            DateTime.parse(DateFormat("yyyy-MM-dd").format(DateTime.now())));
-    await FireBaseHelper.insert(cepModel);
+        dateTime: today);
+    await FireBaseHelper.insertCep(cepModel);
+    await FireBaseHelper.insertDateTimeCount(today);
     isSaving.value = false;
   }
 

@@ -22,10 +22,12 @@ class AllTabView extends StatelessWidget {
           );
         }
         return homeController.dateList.isEmpty
-            ? const Text(
-                "Nenhuma pesquisa feita",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-              )
+            ? const Center(
+              child: Text(
+                  "Nenhuma pesquisa feita",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                ),
+            )
             : ListView.builder(
                 itemCount: homeController.dateList.length,
                 itemBuilder: (context, index) {
@@ -35,7 +37,7 @@ class AllTabView extends StatelessWidget {
                         borderRadius: BorderRadius.circular(20)),
                     child: ExpansionTile(
                       title: Text(
-                        '${DateFormat("dd/MM/yyyy").format(item.dateTime)} (${item.count})',
+                        '${DateFormat("dd/MM/yyyy").format(item.dateTime)} (${item.contador})',
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                       children: _getChildren(item.dateTime),
