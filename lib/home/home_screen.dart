@@ -2,6 +2,7 @@ import 'package:cep_search_test/home/controller/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'components/all_tab_view.dart';
 import 'components/floating_button.dart';
 import 'components/today_tab_view.dart';
 
@@ -34,12 +35,7 @@ class HomePage extends StatelessWidget {
         body: TabBarView(
           children: [
             TodayTabView(),
-            ListView.builder(
-              itemBuilder: (context, index) => const ExpansionTile(
-                title: Text("01/10/2022"),
-                children: [],
-              ),
-            ),
+            AllTabView(),
           ],
         ),
       ),

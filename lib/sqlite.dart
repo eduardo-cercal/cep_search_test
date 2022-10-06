@@ -35,13 +35,10 @@ class DatabaseHelper {
         );''');
   }
 
-  Future<List<CepModel>> getTodaySearch() async {
+  Future<List<CepModel>> getTodaySearch(int date) async {
     Database db = await instance.database;
     List<Map<String, dynamic>> queryResult =
-        await db.query(cepTable, where: "$dateTimeIns = ?", whereArgs: [
-      DateTime.parse(DateFormat("yyyy-MM-dd").format(DateTime.now()))
-          .millisecondsSinceEpoch
-    ]);
+        await db.query(cepTable, where: "$dateTimeIns = ?", whereArgs: [date]);
     return queryResult.isNotEmpty
         ? queryResult.map((json) => CepModel.fromJson(json)).toList()
         : [];
@@ -49,7 +46,11 @@ class DatabaseHelper {
 
   Future<List> getAllDates() async {
     Database db = await instance.database;
-    return await db.query(cepTable, columns: [dateTimeIns]);
+    final queryResult = await db.rawQuery(
+        '''select $dateTimeIns, count(*) from $cepTable group by $dateTimeIns''');
+
+
+    return [];
   }
 
   Future<void> insert(CepModel cepModel) async {

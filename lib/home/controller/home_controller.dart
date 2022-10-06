@@ -20,9 +20,17 @@ class HomeController extends GetxController {
 
   final cepList = [].obs;
 
-  Future<void> todaySearch() async {
+  final dateList = [].obs;
+
+  Future<void> todaySearch(int date) async {
     loadingList.value = true;
-    cepList.value = await DatabaseHelper.instance.getTodaySearch();
+    cepList.value = await DatabaseHelper.instance.getTodaySearch(date);
+    loadingList.value = false;
+  }
+
+  Future<void> allSearch() async{
+    loadingList.value = true;
+
     loadingList.value = false;
   }
 

@@ -9,6 +9,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:intl/intl.dart';
 
 class TodayTabView extends StatelessWidget {
   final homeController = Get.find<HomeController>();
@@ -18,7 +19,10 @@ class TodayTabView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Completer<GoogleMapController> _controller = Completer();
-    homeController.todaySearch();
+    final mediaData = MediaQuery.of(context).size;
+    homeController.todaySearch(
+        DateTime.parse(DateFormat("yyyy-MM-dd").format(DateTime.now()))
+            .millisecondsSinceEpoch);
     return Obx(
       () {
         if (homeController.loadingList.value) {
@@ -56,13 +60,13 @@ class TodayTabView extends StatelessWidget {
                           ),
                         ),
                         SizedBox(
-                          width: 300,
-                          height: 300,
+                          width: mediaData.width,
+                          height: mediaData.height * 0.5,
                           child: GoogleMap(
                             mapType: MapType.normal,
                             initialCameraPosition: CameraPosition(
-                                target: LatLng(item.cidadeLatitude.toDouble(),
-                                    item.cidadeLongitude.toDouble()),
+                                target: LatLng(item.marcadorLatitude.toDouble(),
+                                    item.marcadorLongitude.toDouble()),
                                 zoom: 11),
                             markers: {
                               Marker(

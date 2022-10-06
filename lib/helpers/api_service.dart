@@ -17,6 +17,6 @@ class ApiService extends GetConnect {
         await get(Uri.parse(""));
     log(response.body);
     final Map result = (jsonDecode(response.body));
-    return /*result*/[];
+    return [];
   }
 }
