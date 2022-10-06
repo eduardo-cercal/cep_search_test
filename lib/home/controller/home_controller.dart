@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 
+import '../../helpers/firebase_helper.dart';
 import '../components/dialog/components/advance_search/controller/advance_search_controller.dart';
 
 class HomeController extends GetxController {
@@ -27,7 +28,7 @@ class HomeController extends GetxController {
 
   Future<void> todaySearch(int date) async {
     loadingList.value = true;
-    cepList.value = await DatabaseHelper.instance.getTodaySearch(date);
+    cepList.value =  await FireBaseHelper.getCep(date);
     loadingList.value = false;
   }
 
@@ -57,7 +58,7 @@ class HomeController extends GetxController {
         marcadorLongitude: map["markerLongitude"],
         dateTime:
             DateTime.parse(DateFormat("yyyy-MM-dd").format(DateTime.now())));
-    await DatabaseHelper.instance.insert(cepModel);
+    await FireBaseHelper.insert(cepModel);
     isSaving.value = false;
   }
 

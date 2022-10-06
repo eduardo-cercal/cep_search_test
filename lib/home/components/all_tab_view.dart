@@ -21,23 +21,28 @@ class AllTabView extends StatelessWidget {
             child: CircularProgressIndicator(),
           );
         }
-        return ListView.builder(
-          itemCount: homeController.dateList.length,
-          itemBuilder: (context, index) {
-            final DateModel item = homeController.dateList[index];
-            return Card(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20)),
-              child: ExpansionTile(
-                title: Text(
-                  '${DateFormat("dd/MM/yyyy").format(item.dateTime)} (${item.count})',
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
-                children: _getChildren(item.dateTime),
-              ),
-            );
-          },
-        );
+        return homeController.dateList.isEmpty
+            ? const Text(
+                "Nenhuma pesquisa feita",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+              )
+            : ListView.builder(
+                itemCount: homeController.dateList.length,
+                itemBuilder: (context, index) {
+                  final DateModel item = homeController.dateList[index];
+                  return Card(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)),
+                    child: ExpansionTile(
+                      title: Text(
+                        '${DateFormat("dd/MM/yyyy").format(item.dateTime)} (${item.count})',
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      children: _getChildren(item.dateTime),
+                    ),
+                  );
+                },
+              );
       },
     );
   }
@@ -49,7 +54,10 @@ class AllTabView extends StatelessWidget {
         children.add(Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            '${cep.cep} - ${cep.bairro}',style: const TextStyle(fontSize: 17),textAlign: TextAlign.justify,),
+            '${cep.cep} - ${cep.bairro}',
+            style: const TextStyle(fontSize: 17),
+            textAlign: TextAlign.justify,
+          ),
         ));
       }
     }

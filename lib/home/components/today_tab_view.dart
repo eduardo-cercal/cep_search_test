@@ -35,7 +35,7 @@ class TodayTabView extends StatelessWidget {
         }
         return homeController.cepList.isEmpty
             ? const Center(
-                child: Text("Nenhuma pesquisa feita hoje"),
+                child: Text("Nenhuma pesquisa feita hoje",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15),),
               )
             : ListView.builder(
                 itemCount: homeController.cepList.length,
